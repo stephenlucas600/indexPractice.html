@@ -1,0 +1,48 @@
+---
+layout: page
+title: ploeh blog
+tagline: danish software design
+description: "Danish software design"
+---
+{% include JB/setup %}
+
+{% for post in paginator.posts %}
+
+   <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+   <div class="date">{{post.date | date: "%A, %d %B %Y %H:%M:%S %Z" }}</div>
+   <div>
+    {{ post.content }}
+   </div>
+   <hr>
+{% endfor %}
+
+<!-- Pagination links -->
+<div class="pagination hidden-print">
+  {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path }}" class="next">Next</a>
+  {% else %}
+  {% endif %}
+  {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path }}" class="previous ">Previous</a>
+  {% else %}
+  {% endif %}
+</div>
+<div class="page_number ">Page {{paginator.page}} of {{paginator.total_pages}}</div>
+
+<!-- Comments visibility -->
+<script type="text/javascript">
+  function getElementsById(elementId) {
+    var elementCollection = new Array();
+    var allElements = document.getElementsByTagName("*");
+    for(i = 0; i < allElements.length; i++)
+      if(allElements[i].id === elementId)
+        elementCollection.push(allElements[i]);
+    return elementCollection;
+  };
+  function hideElementsById(elementId) {
+    var elements = getElementsById(elementId);
+    for(i = 0; i < elements.length; i++)
+      elements[i].hidden = true;
+  };
+  hideElementsById("comments");
+</script>
